@@ -3,7 +3,7 @@ import pandas as pd
 from github import Github
 
 # GitHub Zugangsdaten
-github_token = "IHR_GITHUB_TOKEN"
+github_token = GH_Token
 github_repo_owner = "tobkirch"
 github_repo_name = "test"
 github_file_path = "ergebnisse.csv"
