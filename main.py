@@ -15,7 +15,7 @@ def main():
         github_token = "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"
         github_repo_owner = "tobkirch"
         github_repo_name = "test"
-        github_file_path = "ergebnisse.txt"
+        github_file_path = "blob/main/ergebnisse.txt"
 
         # GitHub-Client initialisieren
         g = Github(github_token)
