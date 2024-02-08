@@ -10,7 +10,7 @@ def upload_csv():
 
 # Funktion zum Speichern von Daten in der CSV-Datei
 def save_to_csv(data, filename):
-    data.to_csv(filename, index=False)
+    data.to_csv(filename, index=False, sep=";")
 
 # Streamlit-Anwendung
 def main():
@@ -30,7 +30,7 @@ def main():
         # Button zum Speichern der Daten
         if st.button("Daten speichern"):
             new_entry = {'Spalte 1': text_input1, 'Spalte 2': text_input2}
-            df = df.append(new_entry, ignore_index=True)
+            df = pd.concat([df, pd.DataFrame([new_entry])], ignore_index=True)
             save_to_csv(df, "updated_data.csv")
             st.success("Daten erfolgreich gespeichert!")
 
