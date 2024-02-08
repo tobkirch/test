@@ -28,13 +28,16 @@ def main():
         text_input1 = st.text_input("Texteingabe 1")
         text_input2 = st.text_input("Texteingabe 2")
 
-        # Button zum Speichern der Daten
+       # Button zum Speichern der Daten
         if st.button("Daten speichern"):
-            new_entry = {'Text 1': text_input1, 'Text 2': text_input2}
-            df = df.append(new_entry, ignore_index=True)
-            save_to_csv(df, "updated_data.csv")
-            st.success("Daten erfolgreich gespeichert!")
-
+            if df is not None:
+                new_entry = {'Text 1': text_input1, 'Text 2': text_input2}
+                df = df.append(new_entry, ignore_index=True)
+                save_to_csv(df, "updated_data.csv")
+                st.success("Daten erfolgreich gespeichert!")
+        else:
+            st.error("Es wurde keine CSV-Datei hochgeladen oder die hochgeladene CSV-Datei ist leer.")
+            
         # Button zum Herunterladen der CSV-Datei
         st.header("CSV-Datei herunterladen")
         if st.button("CSV-Datei herunterladen"):
