@@ -1,32 +1,49 @@
 import streamlit as st
-from github import Github
+import pandas as pd
 
-# Streamlit App
+# Funktion zum Hochladen einer CSV-Datei
+def upload_csv():
+    uploaded_file = st.file_uploader("CSV-Datei hochladen", type=["csv"])
+    if uploaded_file is not None:
+        df = pd.read_csv(uploaded_file)
+        return df
+    return None
+
+# Funktion zum Speichern von Daten in der CSV-Datei
+def save_to_csv(data, filename):
+    data.to_csv(filename, index=False)
+
+# Streamlit-Anwendung
 def main():
-    st.title("Text in GitHub Datei schreiben")
+    st.title("CSV Daten bearbeiten")
 
-    # Texteingabefelder
-    text1 = st.text_input("Text 1 eingeben")
-    text2 = st.text_input("Text 2 eingeben")
+    # CSV-Datei hochladen
+    st.header("CSV-Datei hochladen")
+    df = upload_csv()
+    if df is not None:
+        st.dataframe(df)
 
-    # Button zum Speichern
-    if st.button("Speichern"):
-        # GitHub-Repository konfigurieren
-        github_token = "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"
-        github_repo_owner = "tobkirch"
-        github_repo_name = "test"
-        github_file_path = "blob/main/ergebnisse.txt"
+        # Texteingaben machen
+        st.header("Neuen Eintrag hinzufügen")
+        text_input1 = st.text_input("Texteingabe 1")
+        text_input2 = st.text_input("Texteingabe 2")
 
-        # GitHub-Client initialisieren
-        g = Github(github_token)
-        repo = g.get_user(github_repo_owner).get_repo(github_repo_name)
-        contents = repo.get_contents(github_file_path)
+        # Button zum Speichern der Daten
+        if st.button("Daten speichern"):
+            new_entry = {'Text 1': text_input1, 'Text 2': text_input2}
+            df = df.append(new_entry, ignore_index=True)
+            save_to_csv(df, "updated_data.csv")
+            st.success("Daten erfolgreich gespeichert!")
 
-        # Texte in Datei schreiben
-        updated_content = f"{text1}\n{text2}"
-        repo.update_file(contents.path, "Updated via Streamlit", updated_content, contents.sha)
-
-        st.success("Text erfolgreich in GitHub Datei gespeichert!")
+        # Button zum Herunterladen der CSV-Datei
+        st.header("CSV-Datei herunterladen")
+        if st.button("CSV-Datei herunterladen"):
+            st.write("Herunterladen der CSV-Datei...")
+            with open("updated_data.csv", "rb") as file:
+                st.download_button(label="Klicke hier, um die aktualisierte CSV-Datei herunterzuladen",
+                                   data=file,
+                                   file_name="updated_data.csv",
+                                   mime="text/csv")
 
 if __name__ == "__main__":
     main()
