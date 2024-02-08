@@ -5,8 +5,13 @@ import pandas as pd
 def upload_csv():
     uploaded_file = st.file_uploader("CSV-Datei hochladen", type=["csv"])
     if uploaded_file is not None:
-        df = pd.read_csv(uploaded_file)
-        return df
+        try:
+            df = pd.read_csv(uploaded_file)
+            st.dataframe(df)  # Anzeigen der Daten aus der hochgeladenen CSV-Datei
+            return df
+        except pd.errors.EmptyDataError:
+            st.error("Die hochgeladene CSV-Datei ist leer.")
+            return None
     return None
 
 # Funktion zum Speichern von Daten in der CSV-Datei
