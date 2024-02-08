@@ -4,10 +4,10 @@ from github import Github
 from io import StringIO
 
 # GitHub Zugangsdaten
-github_token = "IHR_GITHUB_TOKEN"
-github_repo_owner = "IHR_REPO_OWNER"
-github_repo_name = "IHR_REPO_NAME"
-github_file_path = "daten.csv"
+github_token = st.secrets["GH_Token"]
+github_repo_owner = "tobkirch"
+github_repo_name = "test"
+github_file_path = "ergebnisse.csv"
 
 # Streamlit App Titel
 st.title("Daten in CSV speichern")
