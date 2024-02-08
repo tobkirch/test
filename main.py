@@ -12,7 +12,7 @@ def main():
     # Button zum Speichern
     if st.button("Speichern"):
         # GitHub-Repository konfigurieren
-        github_token = "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"
+        github_token = "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"
         github_repo_owner = "tobkirch"
         github_repo_name = "test"
         github_file_path = "ergebnisse.txt"
