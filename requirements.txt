@@ -1,3 +1,5 @@
 streamlit
 PyGithub
 pandas
+numpy
+Pillow
