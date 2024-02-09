@@ -15,7 +15,10 @@ def main():
 
         # Zuschnittbereich auswählen
         st.write("Wähle den Bereich aus, den du zuschneiden möchtest.")
-        left, top, right, bottom = st.slider("Wähle den linken, oberen, rechten und unteren Rand:", 0, image.width, (0, 0, image.width, image.height))
+        left = st.slider("Linker Rand:", 0, image.width, 0)
+        top = st.slider("Oberer Rand:", 0, image.height, 0)
+        right = st.slider("Rechter Rand:", 0, image.width, image.width)
+        bottom = st.slider("Unterer Rand:", 0, image.height, image.height)
 
         # Bild zuschneiden
         cropped_image = image.crop((left, top, right, bottom))
