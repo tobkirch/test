@@ -23,7 +23,7 @@ def main():
         cropped_image = image.crop((left, top, right, bottom))
 
         # Zugeschnittenes Bild anzeigen
-        st.image(cropped_image, caption="Zugeschnittenes Bild", use_column_width=False)
+        st.image(cropped_image, caption="Zugeschnittenes Bild", use_column_width=True)
 
 if __name__ == "__main__":
     main()
