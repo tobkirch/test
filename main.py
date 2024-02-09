@@ -9,6 +9,9 @@ def main():
     uploaded_image = st.file_uploader("Bild auswählen", type=["jpg", "jpeg", "png"])
 
     if uploaded_image is not None:
+        # Bild anzeigen
+        image = Image.open(uploaded_image)
+
         # Zuschnittbereich auswählen
         st.write("Wähle den Bereich aus, den du zuschneiden möchtest.")
         left = st.slider("Linker Rand:", 0, image.width, 0)
