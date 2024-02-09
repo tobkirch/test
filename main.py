@@ -9,10 +9,6 @@ def main():
     uploaded_image = st.file_uploader("Bild auswählen", type=["jpg", "jpeg", "png"])
 
     if uploaded_image is not None:
-        # Bild anzeigen
-        image = Image.open(uploaded_image)
-        st.image(image, caption="Originalbild", use_column_width=True)
-
         # Zuschnittbereich auswählen
         st.write("Wähle den Bereich aus, den du zuschneiden möchtest.")
         left = st.slider("Linker Rand:", 0, image.width, 0)
@@ -24,7 +20,7 @@ def main():
         cropped_image = image.crop((left, top, right, bottom))
 
         # Zugeschnittenes Bild anzeigen
-        st.image(cropped_image, caption="Zugeschnittenes Bild", use_column_width=True)
+        st.image(cropped_image, caption="Zugeschnittenes Bild", use_column_width=False)
 
 if __name__ == "__main__":
     main()
